@@ -15,6 +15,7 @@ import OtpScreen from "./screens/OtpScreen";
 import ManagerLoginScreen from "./screens/ManagerScreens/ManagerLoginScreen";
 import ManagerOtpScreen from "./screens/ManagerScreens/ManagerOtpScreen";
 import CustomerInventoryScreen from "./screens/ManagerScreens/CustomerInventoryScreen";
+import InventoryScreen from "./screens/Inventory";
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,7 @@ const AppNavigator = () => (
       <Stack.Screen name="ManagerLogin" component={ManagerLoginScreen} />
       <Stack.Screen name="ManagerOtpScreen" component={ManagerOtpScreen} />
       <Stack.Screen name="CustomerInventoryScreen" component={CustomerInventoryScreen} />
+      <Stack.Screen name="Inventory" component={InventoryScreen} />
 
       {/* Manager Home */}
       <Stack.Screen

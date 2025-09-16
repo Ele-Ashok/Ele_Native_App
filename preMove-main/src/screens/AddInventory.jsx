@@ -26,7 +26,7 @@ const AddInventory = () => {
 
   const fetchAllItems = async () => {
     try {
-      const res = await fetch('http://192.168.0.155:5000/api/all-items');
+      const res = await fetch('http://192.168.0.161:5000/api/all-items');
       const data = await res.json();
       setItems(data);
     } catch (error) {
@@ -45,7 +45,7 @@ const AddInventory = () => {
       }
 
       const res = await fetch(
-        `http://192.168.0.155:5000/api/sub-category-items/${categoryId}`,
+        `http://192.168.0.161:5000/api/sub-category-items/${categoryId}`,
       );
       const data = await res.json();
       setItems(data);

@@ -15,7 +15,7 @@ export default function ItemCategory({ onSelect }) {
 
   // ✅ Backend se categories fetch karna
   useEffect(() => {
-    fetch('http://192.168.0.155:5000/api/categories')
+    fetch('http://192.168.0.161:5000/api/categories')
       .then(res => res.json())
       .then(data => {
         // "All" ko manually prepend kar do

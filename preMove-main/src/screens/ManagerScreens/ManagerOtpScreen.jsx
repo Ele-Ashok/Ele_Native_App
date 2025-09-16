@@ -35,7 +35,7 @@ export default function ManagerOtpScreen({ route, navigation }) {
 
     try {
       const response = await fetch(
-        'http://192.168.0.155:5000/api/manager/verify-otp',
+        'http://192.168.0.161:5000/api/manager/verify-otp',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -73,7 +73,7 @@ export default function ManagerOtpScreen({ route, navigation }) {
 
     try {
       const response = await fetch(
-        'http://192.168.0.155:5000/api/manager/send-otp',
+        'http://192.168.0.161:5000/api/manager/send-otp',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

@@ -4,13 +4,15 @@ import {
     Text,
     FlatList,
     ActivityIndicator,
-    StyleSheet,
     TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "../utils/baseurl"; // axios instance
+import { CustomerLeadsCss as styles } from "../assets/css/ScreensCss"; // ✅ Import separate css
+import { useNavigation } from "@react-navigation/native";
 
 const CustomerLeads = () => {
+    const navigation = useNavigation();
     const [leads, setLeads] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -47,7 +49,6 @@ const CustomerLeads = () => {
             <ActivityIndicator size="large" color="#007bff" style={{ marginTop: 20 }} />
         );
     if (error) return <Text style={styles.error}>{error}</Text>;
-
     return (
         <View style={styles.container}>
             <FlatList
@@ -59,11 +60,7 @@ const CustomerLeads = () => {
                         <View style={styles.rowBetween}>
                             <View style={styles.colLeft}>
                                 <Text style={styles.label}>FROM</Text>
-                                <Text
-                                    style={styles.city}
-                                    numberOfLines={1}
-                                    ellipsizeMode="tail"
-                                >
+                                <Text style={styles.city} numberOfLines={1} ellipsizeMode="tail">
                                     {item.moving_from}
                                 </Text>
                             </View>
@@ -100,11 +97,9 @@ const CustomerLeads = () => {
                         <View style={styles.rowBetween}>
                             <Text style={styles.label}>
                                 INVENTORY:{" "}
-                                <Text style={styles.value}>
-                                    {item.inventory || "0"} Items
-                                </Text>
+                                <Text style={styles.value}>{item.inventory || "0"} Items</Text>
                             </Text>
-                            <TouchableOpacity style={styles.btn}>
+                            <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate("Inventory", { id: item.id })}>
                                 <Text style={styles.btnText}>View Inventory</Text>
                             </TouchableOpacity>
                         </View>
@@ -114,44 +109,5 @@ const CustomerLeads = () => {
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    container: { flex: 1, padding: 12, backgroundColor: "#f4f6f9" },
-    card: {
-        backgroundColor: "#fff",
-        borderRadius: 12,
-        padding: 16,
-        marginBottom: 12,
-        shadowColor: "#000",
-        shadowOpacity: 0.08,
-        shadowRadius: 4,
-        shadowOffset: { width: 0, height: 2 },
-        elevation: 2,
-    },
-    rowBetween: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 12,
-    },
-    colLeft: { flex: 1, marginRight: 6 },
-    colRight: { flex: 1, marginLeft: 6 },
-    label: { fontSize: 12, color: "#888", marginBottom: 4 },
-    city: {
-        fontSize: 16,
-        fontWeight: "600",
-        color: "#2d3436",
-    },
-    arrow: { fontSize: 18, color: "#636e72", paddingHorizontal: 8 },
-    value: { fontSize: 14, fontWeight: "500", color: "#2d3436" },
-    btn: {
-        backgroundColor: "#00b894",
-        paddingVertical: 6,
-        paddingHorizontal: 14,
-        borderRadius: 20,
-    },
-    btnText: { color: "#fff", fontWeight: "600" },
-    error: { textAlign: "center", marginTop: 20, color: "red" },
-});
 
 export default CustomerLeads;

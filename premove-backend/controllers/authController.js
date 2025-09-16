@@ -1,7 +1,6 @@
 import db from "../config/db.js";
-import axios from "axios";
-import jwt from "jsonwebtoken";
 import fetch from "node-fetch";
+import jwt from "jsonwebtoken";
 
 const WHATSAPP_API_URL = "http://whatsappapi.keepintouch.co.in/api/sendText";
 const WHATSAPP_TOKEN = "YOUR_PINSTORE_TOKEN"; // replace with your token
@@ -21,7 +20,7 @@ export const sendOtp = async (req, res) => {
   if (!phone) return res.status(400).json({ error: "Phone number required" });
 
   db.query(
-    "SELECT id FROM ele_customer_lead WHERE cust_mobile=? LIMIT 1",
+    "SELECT id FROM ele_customer_register WHERE customer_mobile_no=? LIMIT 1",
     [phone],
     async (err, results) => {
       if (err) return res.status(500).json({ error: "DB error" });
@@ -62,7 +61,7 @@ export const verifyOtp = (req, res) => {
   delete otpStore[phone];
 
   db.query(
-    "SELECT * FROM ele_customer_lead WHERE cust_mobile=? LIMIT 1",
+    "SELECT * FROM ele_customer_register WHERE customer_mobile_no=? LIMIT 1",
     [phone],
     (err, results) => {
       if (err) return res.status(500).json({ error: "DB error" });
@@ -76,7 +75,7 @@ export const verifyOtp = (req, res) => {
 
       // save JWT in DB
       db.query(
-        "UPDATE ele_customer_lead SET jwt_token=?, jwt_expiry=? WHERE id=?",
+        "UPDATE ele_customer_register SET jwt_token=?, jwt_expiry=? WHERE id=?",
         [token, expiry, user.id],
         (err2) => {
           if (err2) console.error("❌ JWT save error:", err2);
@@ -97,7 +96,7 @@ export const checkJwt = (req, res) => {
   const { phone } = req.query;
 
   db.query(
-    "SELECT * FROM ele_customer_lead WHERE cust_mobile=? LIMIT 1",
+    "SELECT * FROM ele_customer_register WHERE customer_mobile_no=? LIMIT 1",
     [phone],
     (err, results) => {
       if (err || !results.length) return res.json({ success: false });

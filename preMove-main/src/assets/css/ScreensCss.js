@@ -456,3 +456,42 @@ export const AddItemCss = StyleSheet.create({
     color: 'black',
   },
 });
+
+export const CustomerLeadsCss = StyleSheet.create({
+  container: { flex: 1, padding: 12, backgroundColor: "#ffffffff" },
+  card: {
+    backgroundColor: "#fffbfbff",
+    borderRadius: 12,
+    borderColor: "black",
+    padding: 16,
+    marginBottom: 12,
+    shadowColor: "#000",
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 3 },
+    elevation: 2,
+  },
+  rowBetween: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+  colLeft: { flex: 1, marginRight: 6 },
+  colRight: { flex: 1, marginLeft: 6 },
+  label: { fontSize: 12, color: "#888", marginBottom: 4 },
+  city: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#2d3436",
+  },
+  arrow: { fontSize: 18, color: "#636e72", paddingHorizontal: 8 },
+  value: { fontSize: 14, fontWeight: "500", color: "#2d3436" },
+  btn: {
+    backgroundColor: "#00b894",
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+    borderRadius: 20,
+  },
+  btnText: { color: "#fff", fontWeight: "600" },
+  error: { textAlign: "center", marginTop: 20, color: "red" },
+});

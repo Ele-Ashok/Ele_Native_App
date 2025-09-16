@@ -55,7 +55,7 @@ export default function OtpScreen({ route, navigation }) {
     }
 
     try {
-      const response = await fetch('http://192.168.0.155:5000/api/verify-otp', {
+      const response = await fetch('http://192.168.0.161:5000/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, otp, role: userType }), // 👈 role pass karo
@@ -110,7 +110,7 @@ export default function OtpScreen({ route, navigation }) {
     setTimer(60);
 
     try {
-      const response = await fetch('http://192.168.0.155:5000/api/resend-otp', {
+      const response = await fetch('http://192.168.0.161:5000/api/resend-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone, role: userType }), // 👈 role bhejna hoga

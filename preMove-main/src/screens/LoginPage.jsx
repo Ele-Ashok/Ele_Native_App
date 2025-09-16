@@ -19,7 +19,7 @@ export default function LoginScreen({ navigation }) {
       return Alert.alert('Error', 'Enter valid phone number');
 
     try {
-      const response = await fetch('http://192.168.0.155:5000/api/send-otp', {
+      const response = await fetch('http://192.168.0.161:5000/api/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone }),

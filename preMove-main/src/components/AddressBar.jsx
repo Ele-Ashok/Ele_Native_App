@@ -7,8 +7,8 @@ import GradientBackground from '../components/GradientBackground';
 
 const AddressBar = ({ address = 'Saki Naka Mumbai, Maharashtra 400072' }) => (
   <GradientBackground style={styles.wrap}>
-    <Text style={styles.textmain}>ADDRESS</Text>
-    <Text style={styles.text}>{address}</Text>
+    {/* <Text style={styles.textmain}>ADDRESS</Text> */}
+    {/* <Text style={styles.text}>{address}</Text> */}
   </GradientBackground>
 );
 

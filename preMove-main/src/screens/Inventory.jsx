@@ -13,7 +13,9 @@ import InventoryItem from '../components/InventoryItem';
 import { InventoryScreenCss } from '../assets/css/ScreensCss';
 import colors from '../theme/colors';
 import { api } from '../utils/baseurl';
-export default function InventoryScreen() {
+import BottomTabs from '../navigation/BottomTabs';
+import Header from '../components/Header';
+export default function InventoryScreen({ route, navigation }) {
   const [expanded, setExpanded] = useState(false);
   const [customer, setCustomer] = useState(null);
   const [inventory, setInventory] = useState([]);
@@ -45,36 +47,37 @@ export default function InventoryScreen() {
     outputRange: [0, 510],
   });
 
-  // Fetch customer and inventory
+  // Fetch lead and inventory
   useEffect(() => {
     const fetchData = async () => {
       try {
         // 1️⃣ Get user details and JWT
-        const rawUser = await AsyncStorage.getItem('USER_DETAILS');
-        const rawJwt = await AsyncStorage.getItem('APP_JWT_TOKEN');
-        const leadId = await AsyncStorage.getItem('USER_ID');
-        console.log('rawUser', rawUser);
-        console.log('rawJwt', rawJwt);
+        const { id: leadId } = route.params; // ✅ yahan id milegi
         console.log('leadId', leadId);
 
-        if (!rawUser || !rawJwt || !leadId) {
+        if (!leadId) {
           console.log('❌ Missing session data');
           setLoading(false);
           return;
         }
 
-        const user = JSON.parse(rawUser);
-        setCustomer(user);
-
-        const { token } = JSON.parse(rawJwt);
 
         // 2️⃣ Fetch inventory
         const res = await api.get(`/inventory/${leadId}`, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
           },
         });
+
+        //Fetch lead details
+        const leadRes = await api.get(`/leads/${leadId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        setCustomer(leadRes.data.leads[0]);
+        
 
         const invData = res.data; // ✅ axios me yahi sahi hai
 
@@ -143,7 +146,10 @@ export default function InventoryScreen() {
   };
 
   return (
-    <View style={InventoryScreenCss.container}>
+    <>  
+      <Header />  
+      <View style={InventoryScreenCss.container}>
+
       <ScrollView style={{ flex: 1, padding: 10 }}>
         {customer && (
           <Animated.View style={InventoryScreenCss.customerDetailsContainer}>
@@ -279,6 +285,7 @@ export default function InventoryScreen() {
           />
         ))}
       </ScrollView>
-    </View>
+    </View></>
+
   );
 }

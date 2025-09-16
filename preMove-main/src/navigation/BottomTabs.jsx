@@ -14,6 +14,7 @@ import {
 
 import HomeScreen from '../screens/HomeScreen';
 import RelocRequest from '../screens/RelocRequest';
+import CustomerLeads from '../screens/CustomerLeads';
 import Inventory from '../screens/Inventory';
 import Quote from '../screens/Quote';
 import Account from '../screens/Account';
@@ -44,7 +45,7 @@ const BottomTabs = () => (
           const iconsMap = {
             Home: <HomeIcon color={color} size={iconSize} />,
             'Reloc Req': <DocumentTextIcon color={color} size={iconSize} />,
-            Inventory: <CubeIcon color={color} size={iconSize} />,
+            'Leads': <CubeIcon color={color} size={iconSize} />,
             Quote: <TagIcon color={color} size={iconSize} />,
             Account: <UserIcon color={color} size={iconSize} />,
           };
@@ -54,7 +55,8 @@ const BottomTabs = () => (
     >
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Reloc Req" component={RelocRequest} />
-      <Tab.Screen name="Inventory" component={Inventory} />
+      <Tab.Screen name="Leads" component={CustomerLeads} />
+      {/* <Tab.Screen name="Inventory" component={Inventory} /> */}
       <Tab.Screen name="Quote" component={Quote} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
